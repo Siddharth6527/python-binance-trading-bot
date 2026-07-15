@@ -39,7 +39,7 @@ git clone <your-repo-url>
 cd python-binance-trading-bot
 
 # Create virtual environment
-python -m venv venv
+python3 -m venv venv
 
 # Activate virtual environment
 # macOS/Linux:
@@ -48,14 +48,14 @@ source venv/bin/activate
 venv\Scripts\activate
 
 # Install dependencies
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ### Configure API Keys
 
-1. Go to [Binance Futures Testnet](https://testnet.binancefuture.com)
-2. Create an account and generate API key + secret
-3. Enable Futures permissions on your API key
+1. Go to [Binance Futures Testnet](https://demo.binance.com/en/my/settings/api-management)
+2. Log in to your testnet account and generate API key + secret
+3. Enable **Futures** permissions and **IP Access Restriction** for the key
 4. Copy `.env.example` to `.env` and add your keys:
 
 ```bash
@@ -65,7 +65,6 @@ cp .env.example .env
 ```env
 BINANCE_API_KEY=your_testnet_api_key_here
 BINANCE_API_SECRET=your_testnet_api_secret_here
-USE_TESTNET=True
 ```
 
 ## 🏗 Project Structure
@@ -96,13 +95,13 @@ trading-bot/
 
 ```bash
 # Place a market buy order
-python cli.py market --symbol BTCUSDT --side BUY --quantity 0.01
+python3 cli.py market --symbol BTCUSDT --side BUY --quantity 0.01
 
 # Place a market sell order
 python cli.py market --symbol ETHUSDT --side SELL --quantity 0.1
 
 # Dry run (no actual order)
-python cli.py market --symbol BTCUSDT --side BUY --quantity 0.01 --dry-run
+python3 cli.py market --symbol BTCUSDT --side BUY --quantity 0.01 --dry-run
 ```
 
 ### Limit Order
@@ -118,7 +117,7 @@ python cli.py limit --symbol ETHUSDT --side SELL --quantity 0.1 --price 3000 --t
 ### Verbose Mode
 
 ```bash
-python cli.py market --symbol BTCUSDT --side BUY --quantity 0.01 --verbose
+python3 cli.py market --symbol BTCUSDT --side BUY --quantity 0.01 --verbose
 ```
 
 ## 📝 CLI Reference
@@ -161,19 +160,18 @@ All actions are logged to `logs/bot.log` with timestamps and severity levels:
 - 📤 API requests sent
 - 📥 API responses received
 - ❌ Errors (network, API, validation)
-- 🛡️ Retry attempts
 
 ## 🧪 Running Tests
 
 ```bash
 # Install test dependencies
-pip install -r tests/requirements.txt
+pip3 install -r tests/requirements.txt
 
 # Run all tests
-pytest tests/ -v
+python3 -m pytest tests/ -v
 
 # Run with coverage
-pytest tests/ --cov=bot --cov-report=term-missing
+python3 -m pytest tests/ --cov=bot --cov-report=term-missing
 ```
 
 ## 🏗 Architecture
