@@ -6,10 +6,12 @@ Handles connection to Binance Futures Testnet API.
 import os
 from typing import Optional
 
+import logging
+
 from binance.client import Client
 from binance.enums import FuturesType
 
-from bot.logging_config import logger
+logger = logging.getLogger("trading_bot")
 
 
 def get_client(api_key: Optional[str] = None, api_secret: Optional[str] = None) -> Client:

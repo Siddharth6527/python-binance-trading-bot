@@ -3,15 +3,17 @@ CLI Application for Trading Bot
 Uses Typer for command-line interface and Rich for terminal output.
 """
 
+import logging
 import typer
 from rich.console import Console
 from rich.panel import Panel
-from rich.table import Table
 from rich.text import Text
-from rich import print as rprint
 
 from bot.logging_config import setup_logging
 from bot.orders import place_limit_order, place_market_order
+from bot.validators import ValidationError
+
+logger = logging.getLogger("trading_bot")
 
 
 app = typer.Typer(

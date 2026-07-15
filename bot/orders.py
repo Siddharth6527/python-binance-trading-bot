@@ -3,12 +3,10 @@ Order Placement Module
 Handles placing Market and Limit orders on Binance Futures Testnet.
 """
 
+import logging
 from typing import Optional
 
-from binance.enums import TIME_IN_FORCE_GTC
-
 from bot.client import get_client
-from bot.logging_config import logger
 from bot.validators import (
     ValidationError,
     validate_order_type,
@@ -18,6 +16,9 @@ from bot.validators import (
     validate_symbol,
     validate_time_in_force,
 )
+
+
+logger = logging.getLogger("trading_bot")
 
 
 def place_market_order(

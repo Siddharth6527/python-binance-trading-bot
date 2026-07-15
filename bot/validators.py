@@ -3,7 +3,10 @@ Input Validation for Trading Bot
 Validates all user inputs before sending orders to Binance.
 """
 
+import logging
 from typing import Optional
+
+logger = logging.getLogger("trading_bot")
 
 
 VALID_SIDES = {"BUY", "SELL"}
@@ -16,6 +19,7 @@ class ValidationError(Exception):
 
     def __init__(self, message: str, field: Optional[str] = None):
         self.field = field
+        logger.debug("ValidationError on field '%s': %s", field, message)
         super().__init__(message)
 
 
