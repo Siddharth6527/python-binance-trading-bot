@@ -3,15 +3,21 @@ Binance Client Module
 Handles connection to Binance Futures Testnet API.
 """
 
+import logging
 import os
+from pathlib import Path
 from typing import Optional
 
-import logging
-
 from binance.client import Client
+from dotenv import load_dotenv
+
 from binance.enums import FuturesType
 
 logger = logging.getLogger("trading_bot")
+
+# Load .env from project root so os.getenv() picks up API keys
+_dotenv_path = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(_dotenv_path)
 
 
 def get_client(api_key: Optional[str] = None, api_secret: Optional[str] = None) -> Client:
@@ -42,8 +48,8 @@ def get_client(api_key: Optional[str] = None, api_secret: Optional[str] = None) 
 
     logger.info("Creating Binance Futures client...")
 
-    # Create client
-    client = Client(key, secret)
+    # Create client with testnet flag so it uses testnet.binancefuture.com
+    client = Client(key, secret, testnet=True)
 
     # Verify connection
     try:
